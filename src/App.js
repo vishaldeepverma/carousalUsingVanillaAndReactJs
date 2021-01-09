@@ -12,7 +12,6 @@ export default function App() {
   const [index, setIndex] = useState(0);
 
   // selected category
-
   const [category, setCategory] = useState(0);
 
   // update category and filter data
@@ -23,7 +22,7 @@ export default function App() {
       id === 0
         ? Data
         : products.filter((product) => product.categoryCode === id);
-    console.log(data);
+    // console.log(data);
     setFilteredProducts(data);
   };
 
@@ -32,7 +31,7 @@ export default function App() {
       <div
         style={{
           display: "flex",
-          "align-items": "center",
+          alignItems: "center",
           marginBottom: "50px",
           justifyContent: "center",
           fontSize: "25px"
@@ -57,7 +56,6 @@ export default function App() {
           style={{
             marginRight: "20px",
             width: "100px",
-
             padding: "10px",
             alignItems: "center",
             cursor: "pointer",
@@ -71,7 +69,6 @@ export default function App() {
           style={{
             marginRight: "20px",
             width: "100px",
-
             padding: "10px",
             alignItems: "center",
             cursor: "pointer",
@@ -85,7 +82,6 @@ export default function App() {
           style={{
             marginRight: "20px",
             width: "100px",
-
             padding: "10px",
             alignItems: "center",
             cursor: "pointer",
@@ -100,16 +96,16 @@ export default function App() {
         className="App"
         style={{
           display: "flex",
-          "align-items": "center",
+          alignItems: "center",
           justifyContent: "center"
         }}
       >
         <p
           onClick={() => (index ? setIndex(index - 1) : "")}
           style={{
-            "background-color": index ? "black" : "grey",
+            backgroundColor: index ? "black" : "grey",
             cursor: "pointer",
-            "border-radius": "10px",
+            borderRadius: "10px",
             color: "white",
             margin: "5px",
             padding: "10px",
@@ -120,7 +116,117 @@ export default function App() {
         </p>
 
         {/* show all three products */}
-        <React.Fragment>
+
+        <div
+          style={{
+            height: "380px",
+            maxHeight: "380px",
+            backgroundColor: "white",
+            // border: "1px solid",
+            margin: "5px",
+            width: "300px",
+            maxWidth: "300px",
+            boxShadow: "3px 3px 5px 6px #ccc"
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: `url(${
+                filteredProducts[index] ? filteredProducts[index].image : ""
+              })`,
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+              marginTop: "20px",
+              height: "215px",
+              maxHeight: "215px",
+              width: "200px",
+              backgroundRepeat: "no-repeat",
+              display: "inline-block"
+            }}
+          ></div>
+          <div
+            style={{
+              fontWeight: "bold",
+              fontSize: "15px",
+              marginLeft: "10px",
+              marginRight: "10px"
+            }}
+          >
+            <div style={{ marginTop: "5%" }}>
+              Name: {filteredProducts[index].itemName}
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              Price: <span>₹{filteredProducts[index].itemPrice}.00</span>
+              <span style={{ textDecoration: "line-through", color: "grey" }}>
+                {" ₹"}
+                {filteredProducts[index].itemMrp}.00
+              </span>
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              Category: {filteredProducts[index].category}
+            </div>
+          </div>
+        </div>
+
+        {filteredProducts[index + 1] ? (
+          <div
+            style={{
+              height: "420px",
+              maxHeight: "420px",
+              backgroundColor: "white",
+              // border: "1px solid",
+              margin: "5px",
+              width: "360px",
+              maxWidth: "360px",
+              boxShadow: "3px 3px 5px 6px #ccc"
+            }}
+          >
+            <div
+              style={{
+                backgroundImage: `url(${
+                  filteredProducts[index + 1]
+                    ? filteredProducts[index + 1].image
+                    : ""
+                })`,
+                backgroundPosition: "center",
+                backgroundSize: "contain",
+                marginTop: "20px",
+                backgroundRepeat: "no-repeat",
+                height: "270px",
+                maxWidth: "250px",
+                minWidth: "250px",
+                display: "inline-block"
+              }}
+            ></div>
+
+            <div
+              style={{
+                fontWeight: "bold",
+                fontSize: "15px",
+                marginLeft: "10px",
+                marginRight: "10px"
+              }}
+            >
+              <div style={{ marginTop: "5%" }}>
+                Name:{filteredProducts[index + 1].itemName}
+              </div>
+              <div style={{ marginTop: "5px" }}>
+                Price: <span>₹{filteredProducts[index + 1].itemPrice}.00</span>
+                <span style={{ textDecoration: "line-through", color: "grey" }}>
+                  {" ₹"}
+                  {filteredProducts[index].itemMrp}.00
+                </span>
+              </div>
+              <div style={{ marginTop: "5px" }}>
+                Category:{filteredProducts[index + 1].category}
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {filteredProducts[index + 2] ? (
           <div
             style={{
               height: "380px",
@@ -136,19 +242,22 @@ export default function App() {
             <div
               style={{
                 backgroundImage: `url(${
-                  filteredProducts[index] ? filteredProducts[index].image : ""
+                  filteredProducts[index + 2]
+                    ? filteredProducts[index + 2].image
+                    : ""
                 })`,
                 backgroundPosition: "center",
                 backgroundSize: "contain",
                 marginTop: "20px",
+
+                backgroundRepeat: "no-repeat",
                 height: "215px",
                 maxHeight: "215px",
                 width: "200px",
-
-                backgroundRepeat: "no-repeat",
                 display: "inline-block"
               }}
             ></div>
+
             <div
               style={{
                 fontWeight: "bold",
@@ -158,155 +267,34 @@ export default function App() {
               }}
             >
               <div style={{ marginTop: "5%" }}>
-                Name: {filteredProducts[index].itemName}
+                Name:{filteredProducts[index + 2].itemName}
               </div>
               <div style={{ marginTop: "5px" }}>
-                Price: <span>₹{filteredProducts[index].itemPrice}.00</span>
+                Price: <span>₹{filteredProducts[index + 2].itemPrice}.00</span>
                 <span style={{ textDecoration: "line-through", color: "grey" }}>
                   {" ₹"}
                   {filteredProducts[index].itemMrp}.00
                 </span>
               </div>
               <div style={{ marginTop: "5px" }}>
-                Category: {filteredProducts[index].category}
+                Category:{filteredProducts[index + 2].category}
               </div>
             </div>
           </div>
-
-          {filteredProducts[index + 1] ? (
-            <div
-              style={{
-                height: "420px",
-                maxHeight: "420px",
-                backgroundColor: "white",
-                // border: "1px solid",
-                margin: "5px",
-                width: "360px",
-                maxWidth: "360px",
-                boxShadow: "3px 3px 5px 6px #ccc"
-              }}
-            >
-              <div
-                style={{
-                  backgroundImage: `url(${
-                    filteredProducts[index + 1]
-                      ? filteredProducts[index + 1].image
-                      : ""
-                  })`,
-                  backgroundPosition: "center",
-                  backgroundSize: "contain",
-                  marginTop: "20px",
-
-                  backgroundRepeat: "no-repeat",
-                  height: "270px",
-                  maxWidth: "250px",
-                  minWidth: "250px",
-                  display: "inline-block"
-                }}
-              ></div>
-
-              <div
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "15px",
-                  marginLeft: "10px",
-                  marginRight: "10px"
-                }}
-              >
-                <div style={{ marginTop: "5%" }}>
-                  Name:{filteredProducts[index + 1].itemName}
-                </div>
-                <div style={{ marginTop: "5px" }}>
-                  Price:{" "}
-                  <span>₹{filteredProducts[index + 1].itemPrice}.00</span>
-                  <span
-                    style={{ textDecoration: "line-through", color: "grey" }}
-                  >
-                    {" ₹"}
-                    {filteredProducts[index].itemMrp}.00
-                  </span>
-                </div>
-                <div style={{ marginTop: "5px" }}>
-                  Category:{filteredProducts[index + 1].category}
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-
-          {filteredProducts[index + 2] ? (
-            <div
-              style={{
-                height: "380px",
-                maxHeight: "380px",
-                backgroundColor: "white",
-                // border: "1px solid",
-                margin: "5px",
-                width: "300px",
-                maxWidth: "300px",
-                boxShadow: "3px 3px 5px 6px #ccc"
-              }}
-            >
-              <div
-                style={{
-                  backgroundImage: `url(${
-                    filteredProducts[index + 2]
-                      ? filteredProducts[index + 2].image
-                      : ""
-                  })`,
-                  backgroundPosition: "center",
-                  backgroundSize: "contain",
-                  marginTop: "20px",
-
-                  backgroundRepeat: "no-repeat",
-                  height: "215px",
-                  maxHeight: "215px",
-                  width: "200px",
-                  display: "inline-block"
-                }}
-              ></div>
-
-              <div
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "15px",
-                  marginLeft: "10px",
-                  marginRight: "10px"
-                }}
-              >
-                <div style={{ marginTop: "5%" }}>
-                  Name:{filteredProducts[index + 2].itemName}
-                </div>
-                <div style={{ marginTop: "5px" }}>
-                  Price:{" "}
-                  <span>₹{filteredProducts[index + 2].itemPrice}.00</span>
-                  <span
-                    style={{ textDecoration: "line-through", color: "grey" }}
-                  >
-                    {" ₹"}
-                    {filteredProducts[index].itemMrp}.00
-                  </span>
-                </div>
-                <div style={{ marginTop: "5px" }}>
-                  Category:{filteredProducts[index + 2].category}
-                </div>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </React.Fragment>
+        ) : (
+          ""
+        )}
+        {/* --end */}
 
         <p
           onClick={() =>
             index === filteredProducts.length - 3 ? "" : setIndex(index + 1)
           }
           style={{
-            "background-color":
+            backgroundColor:
               index !== filteredProducts.length - 3 ? "black" : "grey",
             cursor: index !== filteredProducts.length - 3 ? "pointer" : "",
-            "border-radius": "10px",
+            borderRadius: "10px",
             color: "white",
             margin: "5px",
             padding: "10px",
